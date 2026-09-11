@@ -62,6 +62,15 @@ made it unnecessary — those pull requests are the best kind, and saying which
 version changed things helps everyone else. New claims should arrive with the
 evidence tag that fits, and `[verified]` should mean you ran it.
 
+**If you edit the front matter**, keep the YAML valid: a colon followed by a
+space inside an unquoted value starts a mapping, so a description reading
+`running reShapr 0.2.3: the conventions` fails to parse and GitHub renders
+`Error in user YAML` instead of the file. Use a dash, or single-quote the whole
+value — note that this description already contains double quotes, so single
+quotes are the ones to reach for. Worth a quick `python -c "import yaml,io;
+yaml.safe_load(io.open('skills/reshapr/SKILL.md').read().split('---')[1])"`
+before pushing.
+
 ## Licence
 
 MIT. See `LICENSE`.
