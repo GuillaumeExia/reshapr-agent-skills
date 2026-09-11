@@ -1,6 +1,6 @@
 ---
 name: reshapr
-description: Use when working with reShapr — creating or changing MCP expositions, configuration plans, Services, CustomTools artifacts, cross-service scripted tools, backend secrets, gateway telemetry and audit, or the `reshapr` CLI. Field notes from running reShapr 0.2.3: the conventions, ordering and verification steps that get an exposition working first time. Triggers on "reShapr", "exposition", "CustomTools", "config plan", "rs.callTool", "mcp/reshapr", "--audit", reShapr audit records or gateway OpenTelemetry, or any reshapr-cli command.
+description: Use when working with reShapr — creating or changing MCP expositions, configuration plans, Services, CustomTools artifacts, cross-service scripted tools, backend secrets, gateway telemetry and audit, or the `reshapr` CLI. Field notes from running reShapr 0.2.3 — the conventions, ordering and verification steps that get an exposition working first time. Triggers on "reShapr", "exposition", "CustomTools", "config plan", "rs.callTool", "mcp/reshapr", "--audit", reShapr audit records or gateway OpenTelemetry, or any reshapr-cli command.
 ---
 
 # reShapr
