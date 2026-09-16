@@ -81,6 +81,28 @@ $CLI expo create -c <configId> -g 1 -n <name> -o json
 - Omit `--ia` — scoping to the CustomTools artifact alone breaks every call.
 - `--eo` takes operation names (`GET /articles`), not generated tool names.
 
+## import
+
+Re-importing a spec whose `info.title` + `info.version` already match a Service
+updates that Service in place — same id, same `createdOn`, same operation list —
+but **replaces its main artifact with a new id**. The old artifact is gone, not
+superseded, and nothing in the control plane announces the swap. [verified]
+
+Harmless for plans and expositions, which reference the Service, and for
+CustomTools artifacts, which keep their own ids. It is only harmless for
+declarative `tool:` targets **while the operation names are unchanged** — rename
+a path and every override silently points at an operation that no longer exists,
+which lists fine and 500s on call. Compare the operation list the import echoes
+against the `tool:` values, then call a tool rather than listing one.
+
+Nothing re-imports on its own, so the stored spec drifts behind the source
+repository with no signal and can be several commits stale. Diff before
+importing:
+
+```bash
+$CLI artifact get <id> -o json     # .content is the stored document
+```
+
 ## attach
 
 `attach` has **no `--serviceId`**. It resolves the target from the `service:
@@ -89,8 +111,9 @@ Service exactly. A file without that block fails with a bare
 `Attach failed: Internal Server Error`.
 
 Re-attaching a file with the same name **updates the artifact in place, keeping
-its id**, and the change does reach the gateway. Client-side tool-schema caches
-are a separate problem — see SKILL.md.
+its id** — unlike `import`, which replaces the main artifact — and the change
+does reach the gateway. Client-side tool-schema caches are a separate problem —
+see SKILL.md.
 
 ## Deletes
 
